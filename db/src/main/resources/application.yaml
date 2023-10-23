@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      schema: ${DB_SCHEMA}
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: none
+  liquibase:
+    change-log: classpath:/db.changelog/changelog-master.yaml
+    url: ${DB_URl}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    default-schema: ${DB_SCHEMA}
+    liquibase-schema: ${DB_SCHEMA}
+    driver-class-name: org.postgresql.Driver
+
+DB_URL: jdbc:postgresql://localhost:5432/walliet
+DB_USERNAME: w_admin
+DB_PASSWORD: pass123
+DB_SCHEMA: w_dev
+

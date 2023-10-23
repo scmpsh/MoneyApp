@@ -1,0 +1,211 @@
+databaseChangeLog:
+  - changeSet:
+      id: WT-user-v.1.0
+      author: Migal-NV
+      changes:
+        - createTable:
+            tableName: user
+            remarks: User
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_id_pk
+                    nullable: false
+                    unique: true
+              - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: record_status
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: category
+            remarks: Category
+            columns:
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: category_code_pk
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: expense
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: expense_id_pk
+                    nullable: false
+                    unique: true
+              - column:
+                  name: amount
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id_fk
+                    references: user(id)
+              - column:
+                  name: category_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: category_code_fk
+                    references: category(code)
+              - column:
+                  name: record_status
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: income
+            remarks: Income
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: income_id_pk
+                    nullable: false
+              - column:
+                  name: amount
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id_fk
+                    references: user(id)
+              - column:
+                  name: category_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: category_code_fk
+                    references: category(code)
+              - column:
+                  name: record_status
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
