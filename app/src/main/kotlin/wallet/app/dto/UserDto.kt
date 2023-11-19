@@ -1,9 +1,8 @@
 package wallet.app.dto
 
 data class UserDto(
-    private var login: String,
-    private var password: String,
-    private var firstName: String,
-    private var lastName: String,
-    private var email: String
+    var email: String,
+    var password: String,
+    var firstName: String,
+    var lastName: String
 )

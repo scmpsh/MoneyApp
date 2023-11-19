@@ -16,11 +16,11 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: login
+                  name: email
                   type: varchar(255)
                   constraints:
-                    nullable: false
                     unique: true
+                    nullable: false
               - column:
                   name: password
                   type: varchar(255)
@@ -32,11 +32,6 @@ databaseChangeLog:
               - column:
                   name: last_name
                   type: varchar(255)
-              - column:
-                  name: email
-                  type: varchar(255)
-                  constraints:
-                    unique: true
               - column:
                   name: record_status
                   type: boolean
@@ -120,6 +115,11 @@ databaseChangeLog:
                     foreignKeyName: category_code_fk
                     references: category(code)
               - column:
+                  name: comment
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: record_status
                   type: boolean
                   constraints:
@@ -179,6 +179,11 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: category_code_fk
                     references: category(code)
+              - column:
+                  name: comment
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
               - column:
                   name: record_status
                   type: boolean

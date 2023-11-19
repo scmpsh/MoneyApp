@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import wallet.app.dto.ExpenseDto
+import wallet.app.entity.Expense
 import wallet.app.service.ExpenseService
 
 @RestController
@@ -13,9 +14,8 @@ import wallet.app.service.ExpenseService
 class ExpenseController(private val expenseService: ExpenseService) {
 
     @PostMapping("/save")
-    fun saveExpense(@RequestBody expenseDto: ExpenseDto): ResponseEntity<String> {
-        expenseService.saveExpense(expenseDto)
-        return ResponseEntity.ok("Expense was save")
+    fun saveExpense(@RequestBody expenseDto: ExpenseDto): ResponseEntity<Expense> {
+        return ResponseEntity.ok(expenseService.saveExpense(expenseDto))
     }
 
 

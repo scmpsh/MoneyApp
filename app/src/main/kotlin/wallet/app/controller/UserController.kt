@@ -5,18 +5,19 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import wallet.app.dto.IncomeDto
-import wallet.app.entity.Income
-import wallet.app.service.IncomeService
+import wallet.app.dto.UserDto
+import wallet.app.entity.User
+import wallet.app.service.UserService
 
 @RestController
-@RequestMapping("/income")
-class IncomeController(
-    private val incomeService: IncomeService
+@RequestMapping("/user")
+class UserController(
+    private val userService: UserService
 ) {
 
     @PostMapping("/save")
-    fun saveIncome(@RequestBody incomeDto: IncomeDto): ResponseEntity<Income> {
-        return ResponseEntity.ok(incomeService.saveIncome(incomeDto))
+    fun saveUser(@RequestBody userDto: UserDto): ResponseEntity<User> {
+
+        return ResponseEntity.ok(userService.saveUser(userDto))
     }
 }

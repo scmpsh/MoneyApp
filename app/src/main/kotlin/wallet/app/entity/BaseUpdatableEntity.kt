@@ -28,12 +28,12 @@ abstract class BaseUpdatableEntity : BaseEntity() {
 
     override fun setCreatedBy() {
         super.setCreatedBy()
-        this.updateUser = UserHolder().getUserName()
+        this.updateUser = UserHolder.getUserName()
     }
 
     @PreUpdate
     fun setUpdatedBy() {
         this.updateDate = OffsetDateTime.now()
-        this.updateUser = UserHolder().getUserName()
+        this.updateUser = UserHolder.getUserName()
     }
 }

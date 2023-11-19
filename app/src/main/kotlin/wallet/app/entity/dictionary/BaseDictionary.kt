@@ -3,10 +3,25 @@ package wallet.app.entity.dictionary
 import jakarta.persistence.Column
 import jakarta.persistence.Id
 import jakarta.persistence.MappedSuperclass
-import org.springframework.data.annotation.CreatedDate
+import jakarta.persistence.PrePersist
+import org.hibernate.annotations.CreationTimestamp
+import wallet.app.utils.UserHolder
 import java.io.Serializable
+import java.time.OffsetDateTime
 
 @MappedSuperclass
-abstract class BaseDictionary(@Id @Column(name = "code") var code: String,
-                              @Column(name = "name") var name: String,
-                              @Column(name = "create_date") @CreatedDate var createDate: String) : Serializable
+abstract class BaseDictionary : Serializable {
+
+    @Column(name = "create_date")
+    @CreationTimestamp
+    var createDate: OffsetDateTime? = OffsetDateTime.now()
+
+    @Column(name = "create_user")
+    var createUser: String? = "SYSTEM"
+
+    @PrePersist
+    fun setCreatedBy() {
+        this.createDate = OffsetDateTime.now()
+        this.createUser = UserHolder.getUserName()
+    }
+}
