@@ -14,13 +14,13 @@ import java.io.Serializable
 import java.time.OffsetDateTime
 
 @MappedSuperclass
-abstract class BaseEntity : Serializable {
+abstract class BaseEntity<T : Serializable> : Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "wallet.app.utils.WalletUuidGenerator")
     @NonNull
-    var id: String? = null
+    open var id: T? = null
 
     @Column(name = "create_date")
     @CreationTimestamp
@@ -42,7 +42,7 @@ abstract class BaseEntity : Serializable {
 
         if (javaClass != ProxyUtils.getUserClass(other)) return false
 
-        other as BaseEntity
+        other as BaseEntity<*>
 
         return this.id != null && this.id == other.id
     }

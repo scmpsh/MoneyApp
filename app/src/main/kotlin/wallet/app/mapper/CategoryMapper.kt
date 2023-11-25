@@ -8,8 +8,8 @@ import wallet.app.entity.dictionary.Category
 class CategoryMapper: IMapper<Category, CategoryDto> {
     override fun toDto(entity: Category): CategoryDto {
         return CategoryDto(
-            entity.code,
-            entity.name
+            entity.code.uppercase(),
+            entity.name.uppercase()
         )
     }
 

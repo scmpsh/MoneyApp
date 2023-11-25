@@ -7,10 +7,11 @@ import jakarta.persistence.PreUpdate
 import jakarta.persistence.Version
 import org.hibernate.annotations.UpdateTimestamp
 import wallet.app.utils.UserHolder
+import java.io.Serializable
 import java.time.OffsetDateTime
 
 @MappedSuperclass
-abstract class BaseUpdatableEntity : BaseEntity() {
+abstract class BaseUpdatableEntity<T : Serializable> : BaseEntity<T>() {
 
     @Column(name = "record_status", nullable = false)
     var recordStatus: Boolean? = true

@@ -4,7 +4,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import wallet.app.dto.IncomeDto
 import wallet.app.entity.Income
-import wallet.app.repository.CategoryRepository
+import wallet.app.repository.dictionary.CategoryRepository
 import wallet.app.repository.UserRepository
 
 @Component

@@ -1,6 +1,7 @@
 package wallet.app.service
 
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import wallet.app.dto.ExpenseDto
 import wallet.app.entity.Expense
 import wallet.app.mapper.IMapper
@@ -12,6 +13,7 @@ class ExpenseService(
     private val mapper: IMapper<Expense, ExpenseDto>
 ) {
 
+    @Transactional
     fun saveExpense(expenseDto: ExpenseDto): Expense {
         val result = mapper.fromDto(expenseDto)
         return expenseRepository.save(result)

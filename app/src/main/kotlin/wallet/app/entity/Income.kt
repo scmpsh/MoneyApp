@@ -9,4 +9,4 @@ class Income(
     @Column(name = "amount") var amount: Double,
     @ManyToOne @JoinColumn(name = "user_id", referencedColumnName = "id") var userId: User,
     @ManyToOne @JoinColumn(name = "category_code", referencedColumnName = "code") var categoryCode: Category
-) : BaseUpdatableEntity()
+) : BaseUpdatableEntity<String>()

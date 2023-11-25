@@ -9,8 +9,21 @@ spring:
       hibernate:
         ddl-auto: none
         default_schema: ${DB_SCHEMA}
+        show_sql: true
+        format_sql: true
   liquibase:
     change-log: classpath:/db.changelog/changelog-master.yaml
+settings:
+  jwt:
+    key: ${JWT_KEY}
+    access-token-expectation: 3600000
+    refresh-token-expectation: 86400000
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
 
 DB_URL: jdbc:postgresql://localhost:5432/walliet
 DB_USERNAME: w_admin
