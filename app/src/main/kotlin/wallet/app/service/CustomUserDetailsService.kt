@@ -20,7 +20,7 @@ class CustomUserDetailsService(
 
     private fun ApplicationUser.mapUserDetails(): UserDetails =
         User.builder()
-            .username(this.email.uppercase())
+            .username(this.login.uppercase())
             .password(this.password)
             .authorities(this.role.authorities)
             .build()

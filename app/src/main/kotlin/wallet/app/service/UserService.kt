@@ -44,8 +44,8 @@ class UserService(
         )
 
     @Transactional
-    fun getUserByLogin(email: String): User? {
-        return userRepository.getUserByLogin(email)
+    fun getUserByLogin(login: String): User? {
+        return userRepository.getUserByLogin(login)
     }
 
     @Transactional
