@@ -1,10 +1,7 @@
 package wallet.app.controller
 
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import wallet.app.dto.CategoryDto
 import wallet.app.entity.dictionary.Category
 import wallet.app.service.CategoryService
@@ -16,8 +13,8 @@ class CategoryController(
 ) {
 
     @PostMapping("/save")
-    fun saveCategory(categoryDto: CategoryDto): ResponseEntity<Category> {
-        return ResponseEntity.ok( categoryService.saveCategory(categoryDto))
+    fun saveCategory(@RequestBody categoryDto: CategoryDto): ResponseEntity<Category> {
+        return ResponseEntity.ok(categoryService.saveCategory(categoryDto))
     }
 
     @GetMapping("/show")

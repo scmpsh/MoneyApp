@@ -6,6 +6,9 @@ import io.jsonwebtoken.security.Keys
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 import wallet.app.config.JwtProperties
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Service
@@ -39,6 +42,13 @@ class TokenService(
         getAllClaims(token)
             .expiration
             .before(Date(System.currentTimeMillis()))
+
+    fun extractExpiration(token: String): String =
+        getAllClaims(token)
+            .expiration
+            .toInstant()
+            .atZone(ZoneId.of("Europe/Moscow"))
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
     fun isValid(token: String, userDetails: UserDetails): Boolean {
         val login = extractLogin(token)

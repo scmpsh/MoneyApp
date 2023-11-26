@@ -32,7 +32,9 @@ abstract class BaseEntity<T : Serializable> : Serializable {
     @PrePersist
     open fun setCreatedBy() {
         createDate = OffsetDateTime.now()
-        createUser = UserHolder.getUserName()
+        this.createUser = UserHolder.getUserName().let {
+            if (it.isNullOrBlank()) "SYSTEM" else UserHolder.getUserName()
+        }
     }
 
     override fun equals(other: Any?): Boolean {

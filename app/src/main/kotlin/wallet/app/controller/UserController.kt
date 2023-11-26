@@ -16,8 +16,4 @@ class UserController(
     fun saveUser(@RequestBody userDto: UserDto): ResponseEntity<User> {
         return ResponseEntity.ok(userService.saveUser(userDto))
     }
-
-    @GetMapping("/all")
-    fun getAllUsers(): List<User> =
-        userService.getAllUsers()
 }

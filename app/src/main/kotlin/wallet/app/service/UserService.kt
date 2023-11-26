@@ -3,8 +3,10 @@ package wallet.app.service
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import wallet.app.dto.AuthRequestDto
 import wallet.app.dto.UserDto
 import wallet.app.entity.User
+import wallet.app.enums.RoleType
 import wallet.app.mapper.IMapper
 import wallet.app.repository.UserRepository
 
@@ -22,8 +24,28 @@ class UserService(
     }
 
     @Transactional
-    fun getUserByEmail(email: String): User? {
-        return userRepository.getUserByEmail(email)
+    fun saveUser(requestDto: AuthRequestDto): User? {
+        val dbEntity = userRepository.getUserByLogin(requestDto.login)
+        if (dbEntity != null) {
+            return userRepository.save(requestDto.mapToUser())
+        }
+        return null
+    }
+
+    private fun AuthRequestDto.mapToUser(): User =
+        User(
+            null,
+            this.login,
+            this.login,
+            this.password,
+            null,
+            null,
+            RoleType.USER
+        )
+
+    @Transactional
+    fun getUserByLogin(email: String): User? {
+        return userRepository.getUserByLogin(email)
     }
 
     @Transactional

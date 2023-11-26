@@ -5,5 +5,5 @@ import wallet.app.entity.User
 
 @Repository
 interface UserRepository : BaseRepository<User, String> {
-    fun getUserByEmail(email: String): User?
+    fun getUserByLogin(login: String): User?
 }

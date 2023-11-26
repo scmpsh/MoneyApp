@@ -1,7 +1,6 @@
 package wallet.app.entity.dictionary
 
 import jakarta.persistence.Column
-import jakarta.persistence.Id
 import jakarta.persistence.MappedSuperclass
 import jakarta.persistence.PrePersist
 import org.hibernate.annotations.CreationTimestamp
@@ -22,6 +21,8 @@ abstract class BaseDictionary : Serializable {
     @PrePersist
     fun setCreatedBy() {
         this.createDate = OffsetDateTime.now()
-        this.createUser = UserHolder.getUserName()
+        this.createUser = UserHolder.getUserName().let {
+            if (it.isNullOrBlank()) "SYSTEM" else UserHolder.getUserName()
+        }
     }
 }

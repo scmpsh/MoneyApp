@@ -29,12 +29,16 @@ abstract class BaseUpdatableEntity<T : Serializable> : BaseEntity<T>() {
 
     override fun setCreatedBy() {
         super.setCreatedBy()
-        this.updateUser = UserHolder.getUserName()
+        this.updateUser = UserHolder.getUserName().let {
+            if (it.isNullOrBlank()) "SYSTEM" else UserHolder.getUserName()
+        }
     }
 
     @PreUpdate
     fun setUpdatedBy() {
         this.updateDate = OffsetDateTime.now()
-        this.updateUser = UserHolder.getUserName()
+        this.updateUser = UserHolder.getUserName().let {
+            if (it.isNullOrBlank()) "SYSTEM" else UserHolder.getUserName()
+        }
     }
 }

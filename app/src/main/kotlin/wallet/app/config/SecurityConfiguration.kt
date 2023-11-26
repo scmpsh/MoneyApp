@@ -2,7 +2,6 @@ package wallet.app.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -22,16 +21,15 @@ class SecurityConfiguration(
         jwtAuthenticationFilter: JwtAuthenticationFilter
     ): DefaultSecurityFilterChain =
         http
-            .cors { it.disable() }
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/auth", "/auth/refresh", "/error")
+                    .requestMatchers("/auth", "/auth/refresh", "/error", "/user/save")
                     .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/user/save")
-                    .permitAll()
-                    .requestMatchers("/user/all")
-                    .permitAll()
+                    .requestMatchers("/user/**", "/category/**", "/income/**", "/expense/**")
+                    .hasRole("USER")
+                    .requestMatchers("/admin/users")
+                    .hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()
             }

@@ -39,6 +39,11 @@ databaseChangeLog:
                   name: last_name
                   type: varchar(255)
               - column:
+                  name: role
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: record_status
                   type: boolean
                   constraints:
@@ -69,51 +74,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: role
-            remarks: Role
-            columns:
-              - column:
-                  name: code
-                  type: varchar(255)
-                  constraints:
-                    primaryKey: true
-                    primaryKeyName: role_code_pk
-                    nullable: false
-                    unique: true
-              - column:
-                  name: name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: create_date
-                  type: timestamp with timezone
-                  constraints:
-                    nullable: false
-              - column:
-                  name: create_user
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-        - createTable:
-            tableName: user_roles
-            remarks: User roles
-            columns:
-              - column:
-                  name: user_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    foreignKeyName: user_id_fk
-                    references: user(id)
-              - column:
-                  name: role_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    foreignKeyName: role_code_fk
-                    references: role(code)
-        - createTable:
             tableName: category
             remarks: Category
             columns:
@@ -133,6 +93,11 @@ databaseChangeLog:
               - column:
                   name: create_date
                   type: timestamp with timezone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_user
+                  type: varchar(255)
                   constraints:
                     nullable: false
         - createTable:
@@ -265,40 +230,3 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
-  - changeSet:
-      id: WT-insert-user-roles-v.1.0
-      author: Migal-NV
-      changes:
-      - insert:
-          tableName: role
-          columns:
-            - column:
-                name: code
-                value: ADMIN
-            - column:
-                name: name
-                value: ADMIN ROLE
-            - column:
-                name: create_date
-                value: "now()"
-            - column:
-                name: create_user
-                value: "SYSTEM"
-      - insert:
-          tableName: role
-          columns:
-            - column:
-                name: code
-                value: USER
-            - column:
-                name: name
-                value: USER ROLE
-            - column:
-                name: create_date
-                value: "now()"
-            - column:
-                name: create_user
-                value: "SYSTEM"
-
-
-
