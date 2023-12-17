@@ -31,7 +31,7 @@ class JwtAuthenticationFilter(
             return
         }
 
-        val jwtToken = authHeader!!.extractTokenValue()
+        val jwtToken = authHeader.extractTokenValue()
         val login = tokenService.extractLogin(jwtToken)
 
         if (login != null && SecurityContextHolder.getContext().authentication == null) {
@@ -54,6 +54,8 @@ class JwtAuthenticationFilter(
     private fun String?.doesNotContainBearerToken(): Boolean =
         this == null || !this.startsWith("Bearer ")
 
-    private fun String.extractTokenValue(): String =
-        this.substringAfter("Bearer ")
+    private fun String?.extractTokenValue(): String =
+        this?.substringAfter("Bearer ")
+            ?: throw IllegalArgumentException("Bearer token not found")
+
 }

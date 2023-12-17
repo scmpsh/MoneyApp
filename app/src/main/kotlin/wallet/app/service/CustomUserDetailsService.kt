@@ -16,7 +16,7 @@ class CustomUserDetailsService(
     override fun loadUserByUsername(username: String): UserDetails =
         userService.getUserByLogin(username)
             ?.mapUserDetails()
-            ?: throw UsernameNotFoundException("Not found by login $username")
+            ?: throw UsernameNotFoundException("Not found user by login $username")
 
     private fun ApplicationUser.mapUserDetails(): UserDetails =
         User.builder()

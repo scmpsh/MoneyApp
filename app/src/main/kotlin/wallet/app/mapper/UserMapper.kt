@@ -25,7 +25,6 @@ class UserMapper : IMapper<User, UserDto> {
 
     override fun fromDto(dto: UserDto): User {
         return User(
-            dto.id,
             dto.login.let { v ->
                 if (v.isNullOrBlank()) dto.email.uppercase() else v.uppercase()
             },

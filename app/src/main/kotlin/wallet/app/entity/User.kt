@@ -6,7 +6,6 @@ import wallet.app.enums.RoleType
 @Entity
 @Table(name = "user")
 class User(
-    @Column(name = "id") override var id: String?,
     @Column(name = "login") var login: String,
     @Column(name = "email") var email: String,
     @Column(name = "password") var password: String,

@@ -23,25 +23,14 @@ class UserService(
         return userRepository.save(mapper.fromDto(user))
     }
 
-    @Transactional
-    fun saveUser(requestDto: AuthRequestDto): User? {
-        val dbEntity = userRepository.getUserByLogin(requestDto.login)
-        if (dbEntity != null) {
-            return userRepository.save(requestDto.mapToUser())
-        }
-        return null
-    }
 
-    private fun AuthRequestDto.mapToUser(): User =
-        User(
-            null,
-            this.login,
-            this.login,
-            this.password,
-            null,
-            null,
-            RoleType.USER
-        )
+    @Transactional
+    fun saveUser(requestDto: AuthRequestDto): User? =
+        userRepository.getUserByLogin(requestDto.login) ?: userRepository.save(requestDto.mapToUser())
+
+    private fun AuthRequestDto.mapToUser(): User = User(
+        this.login, this.login, this.password, null, null, RoleType.USER
+    )
 
     @Transactional
     fun getUserByLogin(login: String): User? {
@@ -49,7 +38,6 @@ class UserService(
     }
 
     @Transactional
-    fun getAllUsers(): List<User> =
-        userRepository.findAll()
+    fun getAllUsers(): List<User> = userRepository.findAll()
 
 }

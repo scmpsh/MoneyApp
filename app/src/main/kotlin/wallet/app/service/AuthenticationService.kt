@@ -76,7 +76,10 @@ class AuthenticationService(
                 )
             else
                 null
-
         }
+    }
+
+    fun revokeToken(token: String) {
+
     }
 }

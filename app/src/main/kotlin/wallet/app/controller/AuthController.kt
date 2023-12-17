@@ -21,16 +21,15 @@ class AuthController(
 ) {
     @PostMapping
     fun authenticate(@RequestBody authRequest: AuthRequestDto): ResponseEntity<AuthResponseDto> {
-        val response = ResponseEntity.ok(authenticationService.authentication(authRequest))
         userService.saveUser(authRequest)
-        return response
+        return  ResponseEntity.ok(authenticationService.authentication(authRequest))
     }
 
     @PostMapping("/refresh")
     fun refreshAccessToken(
         @RequestBody request: RefreshTokenRequestDto
     ): AuthResponseDto =
-        authenticationService.refreshAccessToken(request.token)
+        authenticationService.refreshAccessToken(request.refreshToken)
             ?.mapToTokenResponse()
             ?: throw ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid refresh token")
 

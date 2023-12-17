@@ -4,8 +4,8 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import wallet.app.dto.ExpenseDto
 import wallet.app.entity.Expense
-import wallet.app.repository.dictionary.CategoryRepository
 import wallet.app.repository.UserRepository
+import wallet.app.repository.dictionary.CategoryRepository
 
 @Component
 class ExpenseMapper(
@@ -15,7 +15,8 @@ class ExpenseMapper(
     override fun toDto(entity: Expense): ExpenseDto {
         return ExpenseDto(
             entity.amount,
-            entity.userId.id!!,
+            entity.userId.id
+                ?: throw IllegalArgumentException("Expense entity with code: ${entity.categoryCode} can't map because user id is null"),
             entity.categoryCode.code
         )
     }
@@ -23,8 +24,10 @@ class ExpenseMapper(
     override fun fromDto(dto: ExpenseDto): Expense {
         return Expense(
             dto.amount,
-            userRepository.findByIdOrNull(dto.userId)!!,
-            categoryRepository.findByIdOrNull(dto.categoryCode)!!
+            userRepository.findByIdOrNull(dto.userId)
+                ?: throw IllegalArgumentException("Expense dto with code: ${dto.categoryCode} can't map because user id is null"),
+            categoryRepository.findByIdOrNull(dto.categoryCode)
+                ?: throw IllegalArgumentException("Expense dto with code: ${dto.categoryCode} can't map because user id is null")
         )
     }
 }

@@ -16,4 +16,10 @@ class UserController(
     fun saveUser(@RequestBody userDto: UserDto): ResponseEntity<User> {
         return ResponseEntity.ok(userService.saveUser(userDto))
     }
+
+    //TODO переключать recordStatus
+    @PostMapping("/delete")
+    fun deleteUser(): ResponseEntity<String> {
+        return ResponseEntity.ok("ok")
+    }
 }

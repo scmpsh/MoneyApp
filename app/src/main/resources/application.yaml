@@ -13,12 +13,20 @@ spring:
         format_sql: true
   liquibase:
     change-log: classpath:/db.changelog/changelog-master.yaml
+server:
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:keystore/walliet_ssl_walliet_rootca_.pfx
+    key-store-password: rootroot
 settings:
   jwt:
-    key: liasudhdfliuWSNDKLQWEJasbdkuABSCUYwgdyifQVWYDIFquyfdabsdyhuFTASasujhdkjasuhdqiuwgdhkuyagskdjyhgjuqywgduyafsjhdfahjgfdyqfwyfdqwfdtdaisjhdliquwhkdjbasjdhgasjkdygakjsdhgakjshxjkbasxjkuhbaskuxygqwkudgqkujbdkjahgiuyguiGIUDgyausfdgJHAgfsdhjyFYQAFWDy
+    key: ${JWT_KEY}
     access-token-expectation: 3600000
     refresh-token-expectation: 86400000
 
+
+#delete before deploy
 logging:
   level:
     org:
@@ -29,4 +37,5 @@ DB_URL: jdbc:postgresql://localhost:5432/walliet
 DB_USERNAME: w_admin
 DB_PASSWORD: pass123
 DB_SCHEMA: w_dev
+JWT_KEY: liasudhdfliuWSNDKLQWEJasbdkuABSCUYwgdyifQVWYDIFquyfdabsdyhuFTASasujhdkjasuhdqiuwgdhkuyagskdjyhgjuqywgduyafsjhdfahjgfdyqfwyfdqwfdtdaisjhdliquwhkdjbasjdhgasjkdygakjsdhgakjshxjkbasxjkuhbaskuxygqwkudgqkujbdkjahgiuyguiGIUDgyausfdgJHAgfsdhjyFYQAFWDy
 
